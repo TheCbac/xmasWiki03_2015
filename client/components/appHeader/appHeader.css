@@ -1,0 +1,17 @@
+#login-buttons{
+	float: right;
+	margin-right: 75px;
+}
+
+#login-dropdown-list{
+	left: -125px;
+}
+
+#login-buttons .login-close-text{
+	float:right;
+}
+
+.logo{
+	margin-left: 50%;
+	font-size: 2em;
+}

@@ -1,0 +1,91 @@
+<template name="cheneyClanPage">
+	<h1>Cheney Clan</h1>
+
+	<div class="middleView">
+		<div class = "people">
+			<ol class = "peopleList">
+				{{#each personInClan}}
+					{{>personTile}}
+				{{/each}}
+			</ol>
+		</div>
+		<div class="wishArea">
+			{{>addItemTemplate}}
+			<ol class = "wishList">{{>wishList}}</ol>
+		</div>
+	</div>
+</template>
+
+
+<template name ="personTile">
+	<li class = "player {{selected}}">
+		<span class = "name">{{getName}}</span>
+	</li>
+</template>
+
+<template name = "wishList">
+ 	
+ 	<!-- There's a better way to do this, so that wishItems doesn't get called multiple times -->
+
+ 	{{#if wishItems}}
+ 		{{#each wishItems}}
+	 		<li class = "wishItems">
+	 			<span class = itemName>
+	 				{{itemName}}
+	 				{{>giftButton}}
+	 				
+	 				
+	 			</span>
+	 			<p class=gifter>{{gifter}}</p>
+	 			<p class=link ><a href="http://{{link}}">{{link}}</a></p>
+	 		</li>
+ 		{{/each}}
+ 	{{else}}
+ 		<div class="noWishItems">{{recipient}} have any items on {{genderProNoun}} wishlist yet! </div>
+ 	{{/if}}
+</template>
+
+<template name="giftButton">
+	{{#if iAmUser }}
+		<button class="Button removeButton"><i class="fa fa-times"></i></button>
+	{{else}}
+		<button class="Button {{giftIconClass}}"><i class="fa {{giftIcon}} "></i></button>
+	{{/if}}
+</template>
+
+<template name="addItemTemplate">
+	{{#if addItem}}
+		{{>newItemError}}
+		<div class="wishItems addNewItem">
+			<form id="newItemForm">
+				<input id="giftName" placeholder="Gift Name">
+				<label for="linkName">URL</label>
+				<input id ="linkName" placeholder="www.google.com">
+				<label for="giftCost">Cost</label>
+				<input id ="giftCost" placeholder="Optional">
+				<button id="newGiftSubmitBtn" type="submit" class="btn btn-default">
+					Create
+				</button>
+			</form>
+			<button class="Button addNewItmBtn" >
+				<i class="fa fa-minus-square"></i>
+			</button>
+		</div>
+	{{else}}
+		{{#if iAmUser}}
+		<div class="wishItems addNewItem">Add new Item<button class="Button addNewItmBtn " ><i class="fa fa-plus-square"></i></button> </div>
+		{{/if}}
+	{{/if}}
+</template>
+
+<template name="newItemError">
+	{{#if error}}
+    	<div id="entryError">
+     		<div class='alert alert-danger'>{{error}}</div>
+    	</div>
+  {{/if}}
+</template>
+
+
+
+

@@ -1,0 +1,13 @@
+<head>
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"></head>
+<template name="appLayout">
+
+	<div id = "container">
+		{{>yield "header"}}
+		<div id = "content">
+		{{>yield}}
+		</div>	
+	</div>
+	{{>yield "footer"}}
+
+</template>

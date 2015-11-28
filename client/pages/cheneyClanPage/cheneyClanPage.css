@@ -1,0 +1,131 @@
+
+.wishList {
+	float:right;
+	display: inline-block;
+	margin:auto;
+  border-style:solid;
+  border: 2px;
+  list-style-type: none;
+	/*width: 200px;*/
+
+}
+
+.wishArea {
+  /*border:2px;
+  border-style: solid;
+  border-color: black;
+  border-left: 0px;*/
+  display: inline-block;
+  /*position: fixed;*/
+  width: 650px;
+  height: 388px;
+  overflow: auto;
+}
+
+
+.middleView{
+  border:1px solid;
+  width: 900px;
+}
+.wishItems {
+  width:600px;
+  border-top: 0;
+  border-bottom: 1px;
+  border-left: 0px;
+  border-style: solid;
+  border-right: 0px;
+  border-color: rgba(128, 128, 128, 0.79);
+}
+
+.itemName{
+  font-weight: bold;
+}
+
+.Button {
+  float:right;
+  margin-top: 10px;
+  margin-right: 5px;
+  padding: 0px 2px;
+}
+
+.peopleList {
+	border-top: 1px solid #f1f1f1;
+  counter-reset: ol-counter;
+  list-style-type: none;
+  margin: 0 0 1em;
+  padding: 0;
+  overflow:auto;
+/*  border: 1px;
+  border-style: solid;
+  border-color: black;*/
+}
+.player {
+  border-bottom: 1px solid #f1f1f1;
+  cursor: pointer;
+  padding: .5em 0;
+  position: relative;
+  overflow: hidden;
+  transition: background 300ms ease-out;
+  border-left: 4px solid white;
+  width: 150px;
+}
+
+.player:before {
+  color: #999;
+  content: counter(ol-counter);
+  counter-increment: ol-counter;
+  display: inline-block;
+  font-weight: 300;
+  line-height: 3em;
+  text-align: center;
+  vertical-align: middle;
+  width: 3em;
+}
+
+.player.selected {
+  background-color: #fefff4;
+  border-left: #eb5f3a 4px solid;
+}
+
+.player .name {
+  display: inline-block;
+  font-size: 1.25em;
+  font-weight: 300;
+  vertical-align: middle;
+}
+
+.player:hover {
+  background-color: #fefff4;
+}
+
+.people {
+  /*margin: 0 auto;*/
+  max-width: 200px;
+  display:inline-block;
+  border-right: 1px solid;
+ /* border-style:solid;
+  border-color: black;
+*/
+}
+
+.noWishItems {
+  font-size:1.5em;
+  color: gray;
+  font-style: italic;
+}
+
+.addNewItem{
+  /*border-bottom: 1px;*/
+  float:right;
+  color: grey;
+  font-size: 1.2em;
+  font-style: italic;
+}
+
+.addNewItmBtn{
+  margin-bottom: 20px;
+}
+
+.alert{
+  color:red;
+}
