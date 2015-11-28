@@ -1,5 +1,13 @@
 <template name="cheneyClanPage">
+	<head>
+		<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+
+	</head>
+
 	<h1>Cheney Clan</h1>
+	{{#if userAdmin}}
+		{{>adminTemplate}}
+	{{/if}}
 
 	<div class="middleView">
 		<div class = "people">
@@ -14,8 +22,45 @@
 			<ol class = "wishList">{{>wishList}}</ol>
 		</div>
 	</div>
+	
 </template>
 
+ <!-- View for the admin -->
+<template name="adminTemplate">
+	<div class="adminArea">
+			
+
+		<form class="pure-form pure-form-aligned">
+		    <fieldset>
+		        <legend>Add User</legend>
+
+		        <label for="firstName">First Name</label>
+		        <input id="firstName" placeholder="John">
+
+		        <label for="lastName">Last Name</label>
+		        <input id="lastName"  placeholder="Doe">
+
+		        <label for="email">Email</label>
+		        <input id="email"  placeholder="me@example.com">
+
+		        <label for="gender">Gender</label>
+		        <select id="gender">
+		            <option>Male</option>
+		            <option>Female</option>
+		        </select>
+		        
+		    </fieldset>
+		</form>
+		<button id="createUserBtn" class="pure-button pure-button-primary">Create User</button>
+
+		<button id="removeUserBtn" class="button-error pure-button">Remove User</button>
+
+
+		</div>
+</template>
+
+
+<!-- generates the personList  -->
 
 <template name ="personTile">
 	<li class = "player {{selected}}">

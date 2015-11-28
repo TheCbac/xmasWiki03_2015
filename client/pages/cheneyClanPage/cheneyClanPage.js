@@ -1,15 +1,65 @@
 Template.cheneyClanPage.helpers({
 	personInClan: function () {
 		if (Meteor.user() !==undefined) {
+			// Find the id of the clan - this should not be hard coded
 			var clanIds = Groups.findOne({name:"CheneyClan"});
+			// get the list of member Ids in the clan
 			var members = clanIds.members;
+			// return the users from the list of member ID's 
 			var people =  Meteor.users.find({ _id : {$in:members}},
 											{sort: {email:1}}
 											 );
 			
 			return people;
 		}
-	}
+	},
+
+	userAdmin: function(){
+		var roles = Meteor.user().profile.roles;
+	    for (var i = 0; i < roles.length; i++) {
+	        if (roles[i] === "admin") {
+	            return true;
+	        }
+	    }
+	    return false;
+	},
+
+	
+
+
+});
+
+newUserCallback = function(error, id){
+		console.log(id);
+};
+
+
+// Admin events
+Template.adminTemplate.events({
+	'click #createUserBtn': function (event, template) {
+		var firstNameIn = template.find("#firstName").value;
+		var lastNameIn = template.find("#lastName").value;
+		var emailIn = template.find("#email").value;
+		var genderIn = template.find("#gender").value;
+		var cheneyClanId = Groups.findOne({name:"CheneyClan"})._id;
+		Meteor.call("createNewUser", firstNameIn, lastNameIn, emailIn, genderIn, cheneyClanId, newUserCallback);
+	},
+
+	'click #removeUserBtn': function (event, template) {
+		//get the person to be removed 
+		var selectedPlayer = Session.get('selectedPlayer');
+
+		var clanId = Groups.findOne({name:"CheneyClan"});
+		var users = clanId.members;
+		index = users.indexOf(selectedPlayer);
+		// remove the selected player from members
+		users.splice(index,1);
+
+		Groups.update({_id:clanId._id},{$set:{members:users}});
+
+
+	},
+
 });
 
 Template.cheneyClanPage.rendered = function () {
@@ -173,6 +223,8 @@ Template.giftButton.helpers({
 });
 
 Template.giftButton.events({
+
+
 	'click .removeButton' : function(event, template){
 		
 		reply = confirm("Are you sure you want to delete "+ template.data.details.name +"?");

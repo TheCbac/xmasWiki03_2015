@@ -10,6 +10,7 @@ Meteor.startup(function() {
 				lastName:'Cheney',
 				groups:[cheneyClanId],
 				gender:"Male",
+				roles:["admin"],
 			}
 		});
 
