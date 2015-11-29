@@ -38,3 +38,8 @@ Router.route('cheneyClanRoute', {
 	path:'/cheneyClan',
 	template: 'cheneyClanPage', 
 });
+
+ Router.route('adminViewRoute', {
+ 	path:'/admin',
+ 	template: 'adminView'
+ });
