@@ -3,7 +3,7 @@ Router.configure({
 	layoutTemplate:'appLayout',
 	notFoundTemplate:"notFoundPage",
 	yieldTemplates:{
-		'appHeader': {to:'header'},
+		// 'appHeader': {to:'header'},
 		'appFooter': {to: 'footer'}
 	}
 });
