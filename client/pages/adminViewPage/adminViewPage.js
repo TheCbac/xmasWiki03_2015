@@ -13,6 +13,15 @@ Template.adminView.helpers({
             
             return people;
         }
+    },
+
+    userIsAdmin: function(){
+        if(Meteor.user()){
+            if ( Meteor.user().profile.roles.indexOf("admin") >= 0 ){
+                return true;
+            }
+        }
+        return false;
     }
 
 });
@@ -26,6 +35,15 @@ Template.personListItem.helpers({
         return this.profile.firstName;
     },
 
+    defaultSelection : function() {
+        if (Meteor.user()){
+            if (Meteor.user()._id === this._id){
+                return  "person-selected";
+            }
+        }
+        return "";
+    },
+
     itemName: function() {
         return this.details.name;
     },
@@ -34,7 +52,14 @@ Template.personListItem.helpers({
 Template.personListItem.events({
     'click .person':function(event, template){
         Session.set("selectedPlayer", this._id);
-        console.log('player');
+        
+        oldPersonItem = document.getElementsByClassName("person-selected")[0];
+        
+        var currentPersonItem = event.currentTarget;
+
+        toggleClass(currentPersonItem, "person-selected");
+        toggleClass(oldPersonItem, "person-selected");
+
     }
 });
 
@@ -55,11 +80,13 @@ Template.giftItems.helpers({
         if (Meteor.user() !==undefined) {
 
             var selectedName = Meteor.users.findOne({_id:Session.get('selectedPlayer')});
-            if (selectedName._id === Meteor.userId()){
-                return "You don't";
-            }   
-            else{
-                return selectedName.profile.firstName +" doesn't";
+            if(selectedName){
+                if (selectedName._id === Meteor.userId()){
+                    return "You don't";
+                }   
+                else{
+                    return selectedName.profile.firstName +" doesn't";
+                }
             }
         }
     },
@@ -69,6 +96,7 @@ Template.giftItems.helpers({
     },
 
     gifter: function(){
+
         if (Session.get('selectedPlayer') == Meteor.userId() ){
             return "";
         }
@@ -89,7 +117,11 @@ Template.giftItems.helpers({
     },
 
     link: function() {
-        return this.details.link;
+        var linkToGift = this.details.link;
+        if (linkToGift === ""){
+            return "#";
+        }
+        return "http://"+linkToGift;
     },
 
 
@@ -129,6 +161,10 @@ Template.adminView.events({
         toggleClass(menu, active);
         toggleClass(menuLink, active);
     },
+
+    'click #signoutBtn': function(event, template){
+        Meteor.logout();
+    },
     
     'click .pure-menu-item' : function(event, template){
         var selectedClass = "pure-menu-selected";
@@ -139,8 +175,6 @@ Template.adminView.events({
         }
         
         toggleClass(event.currentTarget, selectedClass);
-        console.log("changeSelection");
-
     },
 
 
@@ -176,12 +210,6 @@ Template.giftItemButton.events({
         
         items.remove(template.data._id);
 
-        // reply = confirm("Are you sure you want to delete "+ template.data.details.name +"?");
-        // if (reply){
-        //     items.remove(template.data._id);
-        // }
-
-        // else{}
     },
 
     'click .giftButton' : function(event, template){
@@ -190,16 +218,6 @@ Template.giftItemButton.events({
                     {gifter:Meteor.userId()} 
                 }
             );
-        // var owner = Meteor.users.findOne(template.data.owner).profile.firstName;
-        // reply = confirm("Are you sure you want to get " + template.data.details.name + " for " +owner); 
-        // if (reply) {
-
-        //     items.update({_id:template.data._id},
-        //         { $set:
-        //             {gifter:Meteor.userId()} 
-        //         }
-        //     );
-        // }
     },
 
     'click .ungiftButton' : function(event, template){
@@ -209,16 +227,59 @@ Template.giftItemButton.events({
                     {gifter:null} 
                 }
             );
-        // var owner = Meteor.users.findOne(template.data.owner).profile.firstName;
-        // reply = confirm("Are you sure you want don't want to get " + template.data.details.name + " for " +owner);  
-        // if (reply) {
-
-        //     items.update({_id:template.data._id},
-        //         { $set:
-        //             {gifter:null} 
-        //         }
-        //     );
-        // }
     }
 
 });
+
+
+Session.setDefault("addItemBtnPressed", false);
+Session.setDefault("newItemError", null);
+
+Template.addGiftItem.helpers({
+    addItem: function() {
+        return Session.get("addItemBtnPressed");
+    },
+});
+
+
+Template.addGiftItem.events({
+    'click .addNewItmBtn' : function(event, template){
+        console.log("pressed");
+
+        var currentState = Session.get("addItemBtnPressed");
+        var newState = !currentState;
+        Session.set("addItemBtnPressed", newState);
+        // console.log(newState);
+    },
+
+    'submit #newItemForm' :function(event, template){
+        event.preventDefault();
+
+        var giftName = template.find("#giftName").value;
+        var linkName = template.find("#linkName").value;
+        // var giftCost = template.find("#giftCost").value;
+        if(!giftName.length){
+            Session.set("newItemError", "Name is Blank");
+                    
+        }   
+        // else if(!linkName.length){
+        //     Session.set("newItemError", "URL is blank");
+        // }
+        else{
+
+            newId = items.insert({
+                owner:Meteor.userId(),
+                gifter:null,
+                details:{
+                    name:giftName,
+                    link:linkName,
+                }
+            });
+            Session.set("newItemError", null);
+            Session.set("addItemBtnPressed", false);
+        }
+
+        
+    }
+});
+

@@ -118,17 +118,17 @@ appears on the left side of the page.
         /*
         Change color of the anchor links on hover/focus.
         */
-        #menu .pure-menu li a:hover,
+       /* #menu .pure-menu li a:hover,
         #menu .pure-menu li a:focus {
             background: #333;
-        }
+        }*/
 
         
-        /*#menu .pure-menu li a:hover
+        #menu .pure-menu li a:hover
         
         {
             background: #333;
-        }*/
+        }
 
     /*
     This styles the selected menu item `<li>`.
@@ -180,13 +180,13 @@ small screens.
     padding: 2.1em 1.6em;
 }
 
-    .menu-link:hover,
+    /*.menu-link:hover,
     .menu-link:focus {
         background: #000;
-    }
-    ./*menu-link:hover{
-        background: #000;
     }*/
+    .menu-link:hover{
+        background: #000;
+    }
 
     .menu-link span {
         position: relative;
