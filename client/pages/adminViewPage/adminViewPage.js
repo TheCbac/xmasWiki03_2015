@@ -121,6 +121,11 @@ Template.giftItems.helpers({
         if (linkToGift === ""){
             return "#";
         }
+
+        else if (linkToGift.substring(0,7) == "http://"){
+            return linkToGift;
+        }
+    
         return "http://"+linkToGift;
     },
 
@@ -257,6 +262,7 @@ Template.addGiftItem.events({
 
         var giftName = template.find("#giftName").value;
         var linkName = template.find("#linkName").value;
+        console.log(linkName);
         // var giftCost = template.find("#giftCost").value;
         if(!giftName.length){
             Session.set("newItemError", "Name is Blank");
