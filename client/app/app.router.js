@@ -3,7 +3,7 @@ Router.configure({
 	layoutTemplate:'appLayout',
 	notFoundTemplate:"notFoundPage",
 	yieldTemplates:{
-		'appHeader': {to:'header'},
+		// 'appHeader': {to:'header'},
 		'appFooter': {to: 'footer'}
 	}
 });
@@ -34,12 +34,22 @@ Router.route('landingPageRoute', {
 	template: 'landingPage',
 });
 
+// Router.route('cheneyClanRoute', {
+// 	path:'/cheneyClan',
+// 	template: 'cheneyClanPage', 
+// });
+
+Router.route('myAccount',{
+	path:'/myAccount',
+	template: 'myAccountTemplate'
+});
+
 Router.route('cheneyClanRoute', {
 	path:'/cheneyClan',
-	template: 'cheneyClanPage', 
+	template: 'adminView', 
 });
 
  Router.route('adminViewRoute', {
  	path:'/admin',
- 	template: 'adminView'
+ 	template: 'cheneyClanPage'
  });

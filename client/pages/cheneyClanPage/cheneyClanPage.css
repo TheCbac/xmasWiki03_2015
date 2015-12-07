@@ -17,7 +17,7 @@
   border-left: 0px;*/
   display: inline-block;
   /*position: fixed;*/
-  width: 650px;
+  /*width: 650px;*/
   height: 388px;
   overflow: auto;
 }
@@ -36,7 +36,7 @@
   width: 900px;
 }
 .wishItems {
-  width:600px;
+  /*width:600px;*/
   border-top: 0;
   border-bottom: 1px;
   border-left: 0px;
@@ -103,7 +103,7 @@
 }
 
 .player:hover {
-  background-color: #fefff4;
+  /*background-color: #fefff4;*/
 }
 
 .people {
@@ -135,7 +135,7 @@
 }
 
 .addNewItmBtn{
-  margin-bottom: 20px;
+  /*margin-bottom: 20px;*/
 }
 
 .alert{

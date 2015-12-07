@@ -25,8 +25,6 @@ Template.cheneyClanPage.helpers({
 	},
 
 	
-
-
 });
 
 newUserCallback = function(error, id){
