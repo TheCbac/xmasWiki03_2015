@@ -16,6 +16,10 @@
 	float:right;
 }
 
+.overflow {
+	overflow-x:scroll; 
+}
+
 .button-small {
             font-size: 85% !important;
 }	
