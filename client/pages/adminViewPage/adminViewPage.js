@@ -63,6 +63,38 @@ Template.personListItem.events({
     }
 });
 
+Template.itemLinkTemplate.helpers({
+    itemName: function() {
+
+        return this.details.name;
+    },
+
+    itemHasLink: function(){
+        if (this.details.link === ""){
+            return false;
+        }
+        return true;
+    },
+
+    link: function() {
+        var linkToGift = this.details.link;
+        if (linkToGift === ""){
+            return "";
+        }
+
+        else if (linkToGift.substring(0,7) == "http://"){
+            return linkToGift;
+        }
+        else if (linkToGift.substring(0,8) == "https://"){
+            return linkToGift;
+        }
+    
+        return "http://"+linkToGift;
+    },
+
+
+});
+
 Template.giftItems.helpers({
     giftItemsList: function(){
         var currentPerson = Session.get("selectedPlayer");
@@ -91,9 +123,6 @@ Template.giftItems.helpers({
         }
     },
 
-    itemName: function() {
-        return this.details.name;
-    },
 
     gifter: function(){
 
@@ -115,30 +144,6 @@ Template.giftItems.helpers({
             
         }
     },
-
-    link: function() {
-        var linkToGift = this.details.link;
-        if (linkToGift === ""){
-            return "";
-        }
-
-        else if (linkToGift.substring(0,7) == "http://"){
-            return linkToGift;
-        }
-    
-        return "http://"+linkToGift;
-    },
-
-    linkTarget: function(){
-        var linkToGift = this.details.link;
-        if (linkToGift === ""){
-            return "";
-        }
-
-        return "_blank";
-    }
-
-
 
 });
 

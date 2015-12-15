@@ -98,7 +98,9 @@
  		{{#each giftItemsList}}
 	 		<li class="pure-menu-item">
 	 			<div class="pure-menu-link">
-	 				<a href={{link}} target={{linkTarget}}>{{itemName}}</a> {{>giftItemButton}}
+	 				{{>itemLinkTemplate}}
+	 				{{>giftItemButton}}
+	 				<!-- <a href={{link}} target={{linkTarget}}>{{itemName}}</a> {{>giftItemButton}} -->
 	 				<p>{{gifter}}</p>
 	 			</div>
 	 		</li>
@@ -106,6 +108,14 @@
  	{{else}}
  		<div class="">{{recipient}} have any items on {{genderProNoun}} wishlist yet! </div>
  	{{/if}}
+</template>
+
+<template name="itemLinkTemplate">
+	{{#if itemHasLink}}
+		<a href={{link}} target="_blank">{{itemName}}</a>
+	{{else}}
+		{{itemName}}
+	{{/if}}
 </template>
 
 <template name="giftItemButton">
