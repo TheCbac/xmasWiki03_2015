@@ -1,5 +1,7 @@
 Meteor.startup(function() {
 
+	process.env.MAIL_URL="smtp://ccheney:Remembertokeepthegoalinsight!@outgoing.mit.edu:465";
+
 	var craigId, adrienneId, brianId, kathleenId, bruceId, crisId;
 	if (Meteor.users.find().count() === 0){
 		craigId = Accounts.createUser({

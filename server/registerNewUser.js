@@ -8,6 +8,13 @@ Accounts.emailTemplates.enrollAccount.text = function (user, url) {
    return "Please activate your Xmas Wiki account by simply click the link below:\n\n"+ url;
 };
 
+
+Accounts.emailTemplates.resetPassword.html = function(user, url){
+	var len = url.length;
+	newUrl = "http://bilab-one.mit.edu" + url.substring(16,len);
+	return ("Please reset your passwork by clicking on the link below. <p> <a href=" + newUrl+">"+ newUrl +"</p>");
+};
+
 Meteor.methods({
 	createNewUser : function(firstIn, lastIn, emailIn, genderIn, clanIdIn){
 		newId = Accounts.createUser({
