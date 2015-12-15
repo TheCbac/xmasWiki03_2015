@@ -119,7 +119,7 @@ Template.giftItems.helpers({
     link: function() {
         var linkToGift = this.details.link;
         if (linkToGift === ""){
-            return "#";
+            return "";
         }
 
         else if (linkToGift.substring(0,7) == "http://"){
@@ -128,6 +128,15 @@ Template.giftItems.helpers({
     
         return "http://"+linkToGift;
     },
+
+    linkTarget: function(){
+        var linkToGift = this.details.link;
+        if (linkToGift === ""){
+            return "";
+        }
+
+        return "_blank";
+    }
 
 
 
